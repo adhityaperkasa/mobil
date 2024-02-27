@@ -4,54 +4,23 @@ import (
 	"fmt"
 )
 
-// Wheel interface untuk merepresentasikan roda pada mobil
-type Wheel interface {
-	GetType() string
-}
-
-// BanKaret struct untuk roda dengan ban karet
-type BanKaret struct{}
-
-func (bk BanKaret) GetType() string {
-	return "Ban Karet"
-}
-
-// BanKayu struct untuk roda dengan ban kayu1234
-type BanKayu struct{}
-
-func (bk BanKayu) GetType() string {
-	return "Ban Kayu"
-}
-
-// BanBesi struct untuk roda dengan ban besi
-type BanBesi struct{}
-
-func (bb BanBesi) GetType() string {
-	return "Ban Besi"
-}
-
-// Pintu struct untuk merepresentasikan pintu pada mobil
-type Pintu struct {
-	SoundOnKnock string
-	SoundOnOpen  string
-}
-
-// Mobil struct untuk merepresentasikan mobil
-type Mobil struct {
-	RodaDepan    Wheel
-	RodaBelakang Wheel
-	PintuKanan   Pintu
-	PintuKiri    Pintu
-}
-
 func main() {
-	// Membuat objek roda dengan berbagai jenis ban
-	rodaDepan := BanKaret{}
-	rodaBelakang := BanBesi{}
+	fmt.Println("--------- Testing Mobil ------------")
+
+	//Kanan
+	// diketuk --> "knock knock"
+	// dibuka  --> "beep beep"
+
+	//Kiri
+	// diketuk --> "beep beep"
+	// dibuka  --> "knock knock"
+
+	rodaDepan := Karet{}
+	rodaBelakang := Besi{}
 
 	// Membuat objek pintu dengan bunyi yang berbeda
-	pintuKanan := Pintu{SoundOnKnock: "Knock", SoundOnOpen: "beep"}
-	pintuKiri := Pintu{SoundOnKnock: "beep", SoundOnOpen: "Knock"}
+	pintuKanan := Pintu{Diketuk: "Knock", Dibuka: "beep"}
+	pintuKiri := Pintu{Diketuk: "beep", Dibuka: "Knock"}
 
 	// Membuat objek mobil
 	mobil := Mobil{
@@ -61,19 +30,49 @@ func main() {
 		PintuKiri:    pintuKiri,
 	}
 
-	// Penggantian roda
-	mobil.RodaDepan = BanKayu{}
-	mobil.RodaBelakang = BanKaret{}
+	mobil.RodaDepan = Kayu{}
+	mobil.RodaBelakang = Karet{}
 
-	// Output informasi roda
 	fmt.Println("Roda Depan:", mobil.RodaDepan.GetType())
 	fmt.Println("Roda Belakang:", mobil.RodaBelakang.GetType())
 
-	// Menggunakan pintu kanan
-	fmt.Println("Ketuk Pintu Kanan:", mobil.PintuKanan.SoundOnKnock)
-	fmt.Println("Buka Pintu Kanan:", mobil.PintuKanan.SoundOnOpen)
+	fmt.Println("Ketuk Pintu Kanan:", mobil.PintuKanan.Diketuk)
+	fmt.Println("Buka Pintu Kanan:", mobil.PintuKanan.Dibuka)
 
-	// Menggunakan pintu kiri
-	fmt.Println("Ketuk Pintu Kiri:", mobil.PintuKiri.SoundOnKnock)
-	fmt.Println("Buka Pintu Kiri:", mobil.PintuKiri.SoundOnOpen)
+	fmt.Println("Ketuk Pintu Kiri:", mobil.PintuKiri.Diketuk)
+	fmt.Println("Buka Pintu Kiri:", mobil.PintuKiri.Dibuka)
+}
+
+type Roda interface {
+	GetType() string
+}
+
+type Karet struct{}
+
+func (bk Karet) GetType() string {
+	return "Ban Karet"
+}
+
+type Kayu struct{}
+
+func (bk Kayu) GetType() string {
+	return "Ban Kayu"
+}
+
+type Besi struct{}
+
+func (bb Besi) GetType() string {
+	return "Ban Besi"
+}
+
+type Pintu struct {
+	Diketuk string
+	Dibuka  string
+}
+
+type Mobil struct {
+	RodaDepan    Roda
+	RodaBelakang Roda
+	PintuKanan   Pintu
+	PintuKiri    Pintu
 }
