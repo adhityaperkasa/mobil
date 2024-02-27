@@ -16,7 +16,7 @@ func (bk BanKaret) GetType() string {
 	return "Ban Karet"
 }
 
-// BanKayu struct untuk roda dengan ban kayu
+// BanKayu struct untuk roda dengan ban kayu1234
 type BanKayu struct{}
 
 func (bk BanKayu) GetType() string {
